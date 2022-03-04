@@ -9,7 +9,7 @@ Ownership was transferred from @SwapnikKatkoori to @dtsong in March 2022 to cont
 Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
 
 # Table of Contents
-1. [RoadMap]
+1. [RoadMap](#roadmap)
 
 2. [Installation](#install)
 
