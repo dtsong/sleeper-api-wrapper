@@ -5,12 +5,15 @@
 # sleeper-api-wrapper
 A Python API wrapper for Sleeper Fantasy Football, as well as tools to simplify data recieved. It makes all endpoints found in the sleeper api docs: https://docs.sleeper.app/ available and turns the JSON response recieved into python types for easy usage.
 
+Ownership was transferred from @SwapnikKatkoori to @dtsong in March 2022 to continue efforts.
+Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
 
 # Table of Contents
+1. [RoadMap](#roadmap)
 
-1. [ Installation ](#install)
+2. [Installation](#install)
 
-2. [Usage](#usage)
+3. [Usage](#usage)
 
     * [League](#league)
         * [Initialize](#league_initialize)
@@ -44,9 +47,18 @@ A Python API wrapper for Sleeper Fantasy Football, as well as tools to simplify 
         * [Initialize](#players_initialize)
         * [get_all_players()](#get_all_players)
         * [get_trending_players()](#get_trending_players)
-3. [Notes](#notes)
-4. [Dependecnies](#depends)
-5. [License](#license)
+4. [Notes](#notes)
+5. [Dependencies](#depends)
+6. [License](#license)
+
+
+# Project Roadmap
+* Establish solid CICD practices with automated testing and validation of pull requests via GitHub Actions
+* Ensure libraries are up to date and secure.
+* Update endpoints and logic with the current Sleeper API docs
+* Investigate performance optimization (effort, implementation, etc)
+
+Want to help? Send me a message to @dtsong
 
 <a name="install"></a>
 # Install
@@ -175,7 +187,7 @@ Data returned looks like:
 Example usage:
 
 ~~~
-    	league = League(league_id)
+    league = League(league_id)
 	matchups = league.get_matchups(11)
 	users = league.get_users()
 	rosters = league.get_rosters()
@@ -186,7 +198,7 @@ Example usage:
 ## User
 
 <a name="user_initialize"></a>
-### Initiaize
+### Initialize
 ~~~
 from sleeper_wrapper import User
 
@@ -224,7 +236,7 @@ Returns the user_id of the User. This can be useful if the User was initialized 
 ## Stats
 
 <a name="stats_initialize"></a>
-### Initiaize
+### Initialize
 ~~~
 from sleeper_wrapper import Stats
 
@@ -309,7 +321,7 @@ Gets all of the players in fantasy football. Data returned looks like: https://d
 This package is intended to be used by Python version 3.5 and higher. There might be some wacky results for previous versions.
 
 <a name="depends"></a>
-# Dependancies
+# Dependencies
 
 [requests](https://github.com/kennethreitz/requests)
 - Used for all http requests in sleeper_wrapper

@@ -1,9 +1,11 @@
 sleeper-api-wrapper contributors
 ============================================
+[Daniel Song](https://github.com/dtsong)
+- Current Maintainer
 
 [Swapnik Katkoori](https://github.com/SwapnikKatkoori)
 
-  - Author and Maintainer
+  - Original Author and Maintainer
   - Initial code and documentation
   
 [Alex Hawkins](https://github.com/AlexHawkins1)
