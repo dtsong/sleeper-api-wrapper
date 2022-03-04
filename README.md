@@ -9,7 +9,7 @@ Ownership was transferred from @SwapnikKatkoori to @dtsong in March 2022 to cont
 Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
 
 # Table of Contents
-1. [RoadMap](#roadmap)
+1. [RoadMap](#project-roadmap)
 
 2. [Installation](#install)
 
@@ -53,6 +53,7 @@ Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
 
 
 # Project Roadmap
+<a name="project-roadmap">
 * Establish solid CICD practices with automated testing and validation of pull requests via GitHub Actions
 * Ensure libraries are up to date and secure.
 * Update endpoints and logic with the current Sleeper API docs
