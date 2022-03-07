@@ -1,0 +1,22 @@
+[run]
+omit =
+    tests/*
+    *__init__.py*
+
+[report]
+exclude_lines =
+    pass
+    logger
+    pragma: no cover
+    def __repr__
+    if self.debug:
+    if settings.DEBUG:
+    raise AssertionError
+    raise NotImplementedError
+    if 0:
+    if __name__ == .__main__.:
+    return self.__
+    def __iter__
+    def __str__
+    settings.
+    break
