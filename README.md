@@ -3,7 +3,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/SwapnikKatkoori/sleeper-api-wrapper.svg?color=orange)
 ![PyPI](https://img.shields.io/pypi/v/sleeper-api-wrapper)
 # sleeper-api-wrapper
-A Python API wrapper for Sleeper Fantasy Football, as well as tools to simplify data recieved. It makes all endpoints found in the sleeper api docs: https://docs.sleeper.app/ available and turns the JSON response recieved into python types for easy usage.
+A Python API wrapper for Sleeper Fantasy Football, as well as tools to simplify data received. It makes all endpoints found in the sleeper api docs: https://docs.sleeper.app/ available and turns the JSON response received into Python types for easy usage.
 
 Ownership was transferred from @SwapnikKatkoori to @dtsong in March 2022 to continue efforts.
 Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
@@ -214,14 +214,14 @@ Gets data for the user that was specified by the user_id or username when the Us
 ### User.get_all_leagues(sport, season)
 Gets the data of all of the leagues that a user belongs to. Data returned looks like: https://docs.sleeper.app/#get-all-leagues-for-user
 
-- sport: (str)The sport of the leagues. Currently, it can ony be "nfl".
+- sport: (str)The sport of the leagues. Currently, it can only be "nfl".
 - season: (int or str)The season of the leagues. ex. 2018,2019, etc.
 
 <a name="get_all_drafts"></a>
 ### User.get_all_drafts(sport, season)
 Gets the data of all of the drafts of a user in the specified season. Data returned looks like: https://docs.sleeper.app/#get-all-drafts-for-user
 
-- sport: (str)The sport of the leagues. Currently, it can ony be "nfl".
+- sport: (str)The sport of the leagues. Currently, it can only be "nfl".
 - season: (int or str)The season of the leagues. ex. 2018,2019, etc.
 
 <a name="get_username"></a>
