@@ -331,7 +331,11 @@ from sleeper_wrapper import Drafts
 
 drafts = Drafts(league_id)
 ~~~
+<<<<<<< HEAD
 - league_id: (str)The id of your sleeper league
+=======
+- league_id: (str) The id of a user. It can also be a username.
+>>>>>>> e27e285ffdacf7d0167ea6733a353294f579111e
 
 <a name="get_specific_draft"></a>
 ### Drafts.get_specific_draft()
