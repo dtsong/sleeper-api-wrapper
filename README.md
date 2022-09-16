@@ -47,6 +47,11 @@ Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
         * [Initialize](#players_initialize)
         * [get_all_players()](#get_all_players)
         * [get_trending_players()](#get_trending_players)
+    * [Drafts](#drafts)
+        * [Initialize](#drafts_initialize)
+        * [get_specific_draft()](#get_specific_draft)
+        * [get_all_picks()](#get_all_picks)
+        * [get_traded_picks()](#draft.get_traded_picks)
 4. [Notes](#notes)
 5. [Dependencies](#depends)
 6. [License](#license)
@@ -315,6 +320,30 @@ Gets all of the players in fantasy football. Data returned looks like: https://d
 - add_drop: (str) Either "add" or "drop".
 - hours: (int or str) Number of hours to look back. Default is 24 hours.
 - limit: (int or str) Number of results you want. Default is 25.
+
+<a name="drafts"></a>
+## Drafts
+
+<a name="drafts_initialize"></a>
+### Initiaize
+~~~
+from sleeper_wrapper import Drafts
+
+drafts = Drafts(league_id)
+~~~
+- league_id: (str)The id of your sleeper league
+
+<a name="get_specific_draft"></a>
+### Drafts.get_specific_draft()
+Gets specific draft. Data returned looks like: https://docs.sleeper.app/#get-a-specific-draft
+
+<a name="get_all_picks"></a>
+### Drafts.get_all_picks()
+Gets all picks in a draft. Data returned looks like: https://docs.sleeper.app/#get-all-picks-in-a-draft
+
+<a name="draft.get_traded_picks"></a>
+### Drafts.get_traded_picks()
+Gets all traded picks in a draft. Data returned looks like: https://docs.sleeper.app/#get-traded-picks-in-a-draft
 
 <a name="notes"></a>
 # Notes
