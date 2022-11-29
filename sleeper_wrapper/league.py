@@ -138,8 +138,25 @@ class League(BaseApi):
 
 		return total_score
 
-	def empty_roster_spots(self):
-		pass
+	# takes a user id and returns the number of empty roster spots on that team
+	def empty_roster_spots(self, user_id):
+		# get league JSON
+		league = self.get_league()
+		# get size of maximum roster
+		max_roster_size = len(league["roster_positions"])
+
+		# finds roster of user, returns max size - size of user roster
+		rosters = self.get_rosters()
+		for roster in rosters:
+			if user_id == roster["owner_id"]:
+				return max_roster_size - len(roster["players"])
+
+		# returns None if user was not found
+		return None
+
+	# returns name of league
+	def get_league_name(self):
+		return self.get_league()["name"]
 
 	def get_negative_scores(self, week):
 		pass

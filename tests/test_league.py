@@ -118,7 +118,25 @@ def test_get_close_games(capsys):
 	assert isinstance(close_games, dict)
 
 def test_empty_roster_spots():
-	pass
+	"""
+	Tests the empty_roster_spots method
+
+	Assertion 1: ensures that our function returns an integer for all league users (and not None)
+
+	Assertion 2: ensures that our function returns None when an invalid user id is sent
+	"""
+	league = League(442724598706860032)
+	users = league.get_users()
+	rosters = league.get_rosters()
+	# Assertion 1
+	for user in users:
+		user_id = user["user_id"]
+		for roster in rosters:
+			if user_id == roster["user_id"]:
+				assert league.empty_roster_spots(user_id) is not None
+	
+	# Assertion 2
+	assert league.empty_roster_spots(-10000) is None
 
 def test_get_negative_scores():
 	pass
