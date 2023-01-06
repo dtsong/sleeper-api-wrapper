@@ -24,6 +24,9 @@ Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
         * [get_playoff_winners_bracket()](#get_playoff_winners_racket)
         * [get_playoff_losers_bracket()](#get_playoff_losers_racket)
         * [get_transactions()](#get_transactions)
+        * [get_trades()](#get_trades)
+        * [get_waivers()](#get_waivers)
+        * [get_free_agents()](#get_free_agents)
         * [get_traded_picks()](#get_traded_picks)
         * [get_all_drafts()](#get_all_drafts)
         * [get_standings()](#get_standings)
@@ -116,6 +119,24 @@ Gets the playoff losers bracket for the league. Data returned looks like: https:
 
 <a name="get_transactions"></a>
 ### League.get_transactions(week)
+Gets all of the transactions data in the league. Data returned looks like: https://docs.sleeper.app/#get-transactions
+
+- week:(int or str) week of the matchups to be returned.
+
+<a name="get_trades"></a>
+### League.get_trades(week)
+Gets all of the trade transactions data in the league. Data returned looks like: https://docs.sleeper.app/#get-transactions
+
+- week:(int or str) week of the matchups to be returned.
+
+<a name="get_waivers"></a>
+### League.get_waivers(week)
+Gets all of the waiver transactions data in the league. Data returned looks like: https://docs.sleeper.app/#get-transactions
+
+- week:(int or str) week of the matchups to be returned.
+
+<a name="get_free_agents"></a>
+### League.get_free_agents(week)
 Gets all of the transactions data in the league. Data returned looks like: https://docs.sleeper.app/#get-transactions
 
 - week:(int or str) week of the matchups to be returned.

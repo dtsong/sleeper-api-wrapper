@@ -66,6 +66,30 @@ def test_get_transactions():
 	transactions = league.get_transactions("4")
 	assert isinstance(transactions, list)
 
+def test_get_trades():
+	""" Tests the get_trades method.
+	Note: It would be better if we had trades to verify!"""
+	league = League(355526480094113792)
+	trades = league.get_trades(4)
+	assert isinstance(trades, list)
+	assert len(trades) == 0
+
+def test_get_waivers():
+	"""Tests the get_waivers method.
+	Note: It would be better if we had waivers to verify!"""
+	league = League(355526480094113792)
+	waivers = league.get_waivers(4)
+	assert isinstance(waivers, list)
+	assert len(waivers) == 0
+
+def test_get_free_agents():
+	"""Tests the get_free_agents method.
+	Note: It would be better if we had free agents to verify!"""
+	league = League(355526480094113792)
+	free_agents = league.get_free_agents(4)
+	assert isinstance(free_agents, list)
+	assert len(free_agents) == 0
+
 def test_get_traded_picks():
 	""" Tests the get_traded_picks method"""
 	league = League(355526480094113792)
