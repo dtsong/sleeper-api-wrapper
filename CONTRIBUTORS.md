@@ -14,3 +14,7 @@ sleeper-api-wrapper contributors
  
 [scipio314](https://github.com/scipio314)
   - Fixed KeyError in the get_team_score() method.
+
+[Kofi Darfour](https://github.com/kodarfour)
+  - Added ties data to the data returned by the get_standings() method.
+  - Updated documentation

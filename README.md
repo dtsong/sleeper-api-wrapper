@@ -158,9 +158,9 @@ Gets the standings in a league. Returns a list of the standings in order of most
 Data returned looks like:
 
 ~~~
-[(username, number_of_wins, number_of_losses, total_points), (username, number_of_wins, number_of_losses, total_points),...]
+[(username, number_of_wins, number_of_losses, number_of_ties, total_points), (username, number_of_wins, number_of_losses, number_of_ties, total_points),...]
 ~~~
-- types: username(str), number_of_wins(int), number_of_losses(int), total_points(int)
+- types: username(str), number_of_wins(int), number_of_losses(int), number_of_ties(int), total_points(int)
 - "username" could be None if a user does not have a username.
 
 Example usage:
