@@ -330,14 +330,16 @@ from sleeper_wrapper import Players
 players = Players()
 ~~~
 <a name="get_all_players"></a>
-### Players.get_all_players()
-Gets all of the players in fantasy football. Data returned looks like: https://docs.sleeper.app/#fetch-all-players
+### Players.get_all_players(sport)
+Gets all of the players in fantasy football or basketaball (Recommended to use once per day). Data returned looks like: https://docs.sleeper.app/#fetch-all-players
+
+- sport: (str) The sport to get. Only "nfl" or "nba" right now.
 
 <a name="get_trending_players"></a>
 ### Players.get_trending_players(sport, add_drop, hours, limit)
 Gets all of the players in fantasy football. Data returned looks like: https://docs.sleeper.app/#trending-players
 
-- sport: (str) The sport to get. Supports only "nfl" right now.
+- sport: (str) The sport to get. Supports all sports (nfl, nba, lcs, etc...).
 - add_drop: (str) Either "add" or "drop".
 - hours: (int or str) Number of hours to look back. Default is 24 hours.
 - limit: (int or str) Number of results you want. Default is 25.
