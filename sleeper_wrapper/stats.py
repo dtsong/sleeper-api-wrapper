@@ -2,8 +2,8 @@ from typing import Union
 
 from sleeper_wrapper.base_api import BaseApi
 
-class Stats(BaseApi):	
-	def __init__(self):
+class Stats(BaseApi):
+	def __init__(self) -> None:
 		self._base_url = "https://api.sleeper.app/v1/stats/{}".format("nfl")
 		self._projections_base_url = "https://api.sleeper.app/v1/projections/{}".format("nfl")
 		self._full_stats = None

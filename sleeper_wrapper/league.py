@@ -146,8 +146,6 @@ class League(BaseApi):
 		for starter in starters:
 			if stats.get_player_week_stats(week_stats, starter) is not None:
 				try:
-					# FH 3/6/23: score_type options are pts_half_ppr, pts_std, pts_ppr
-					# if player is QB and score type is pts_half_ppr, then I think a KeyError will be thrown
 					total_score += stats.get_player_week_stats(week_stats, starter)[score_type]
 				except KeyError:
 					total_score += 0
