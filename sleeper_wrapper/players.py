@@ -7,5 +7,5 @@ class Players(BaseApi):
 	def get_all_players(self):
 		return self._call("https://api.sleeper.app/v1/players/nfl")
 
-	def get_trending_players(self,sport, add_drop, hours=24, limit=25 ):
+	def get_trending_players(self, sport: str, add_drop: str = "add", hours: int = 24, limit: int = 25):
 		return self._call("https://api.sleeper.app/v1/players/{}/trending/{}?lookback_hours={}&limit={}".format(sport, add_drop, hours, limit))

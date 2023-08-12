@@ -1,53 +1,55 @@
+from typing import Union
+
 from .base_api import BaseApi
 from .stats import Stats
 
 class League(BaseApi):
-	def __init__(self, league_id):
+	def __init__(self, league_id: Union[str, int]) -> None:
 		self.league_id = league_id
 		self._base_url = "https://api.sleeper.app/v1/league/{}".format(self.league_id)
 		self._league = self._call(self._base_url)
 
-	def get_league(self):
+	def get_league(self) -> dict:
 		return self._league
 
-	def get_rosters(self):
+	def get_rosters(self) -> list:
 		return self._call("{}/{}".format(self._base_url,"rosters"))
 
-	def get_users(self):
+	def get_users(self) -> list:
 		return self._call("{}/{}".format(self._base_url,"users"))
 
-	def get_matchups(self, week):
+	def get_matchups(self, week: Union[str, int]) -> list:
 		return self._call("{}/{}/{}".format(self._base_url,"matchups", week))
 
-	def get_playoff_winners_bracket(self):
+	def get_playoff_winners_bracket(self) -> list:
 		return self._call("{}/{}".format(self._base_url,"winners_bracket"))
 
-	def get_playoff_losers_bracket(self):
+	def get_playoff_losers_bracket(self) -> list:
 		return self._call("{}/{}".format(self._base_url,"losers_bracket"))
 
-	def get_transactions(self, week):
+	def get_transactions(self, week: Union[str, int]) -> list:
 		return self._call("{}/{}/{}".format(self._base_url,"transactions", week))
 
-	def get_trades(self, week):
+	def get_trades(self, week: Union[str, int]) -> list:
 		transactions = self.get_transactions(week)
 		return [t for t in transactions if t["type"] == "trade"]
 
-	def get_waivers(self, week):
+	def get_waivers(self, week: Union[str, int]) -> list:
 		transactions = self.get_transactions(week)
 		return [t for t in transactions if t["type"] == "waiver"]
 
-	def get_free_agents(self, week):
+	def get_free_agents(self, week: Union[str, int]) -> list:
 		transactions = self.get_transactions(week)
 		return [t for t in transactions if t["type"] == "free_agent"]
 
-	def get_traded_picks(self):
+	def get_traded_picks(self) -> list:
 		return self._call("{}/{}".format(self._base_url,"traded_picks"))
 
-	def get_all_drafts(self):
+	def get_all_drafts(self) -> list:
 		return self._call("{}/{}".format(self._base_url, "drafts"))
 
-	def map_users_to_team_name(self, users):
-		""" returns dict {user_id:team_name}"""
+	def map_users_to_team_name(self, users: list) -> dict:
+		"""returns dict {user_id:team_name}"""
 		users_dict = {}
 
 		#Maps the user_id to team name for easy lookup
@@ -58,7 +60,8 @@ class League(BaseApi):
 				users_dict[user["user_id"]] = user["display_name"]
 		return users_dict
 
-	def get_standings(self, rosters, users):
+	def get_standings(self, rosters: list, users: list) -> dict:
+		"""returns list of tuples (team_name, wins, losses, points)"""
 		users_dict = self.map_users_to_team_name(users)
 
 		roster_standings_list = []
@@ -81,8 +84,8 @@ class League(BaseApi):
 		
 		return clean_standings_list
 
-	def map_rosterid_to_ownerid(self, rosters ):
-		"""returns: dict {roster_id:[owner_id,pts]} """
+	def map_rosterid_to_ownerid(self, rosters: list) -> dict:
+		"""returns dict {roster_id:[owner_id,pts]}"""
 		result_dict = {}
 		for roster in rosters:
 			roster_id = roster["roster_id"]
@@ -91,17 +94,15 @@ class League(BaseApi):
 
 		return result_dict
 
-	def get_scoreboards(self, rosters, matchups, users, score_type, week):
-		""" returns dict {matchup_id:[(team_name,score), (team_name, score)]}"""
+	def get_scoreboards(self, rosters: list, matchups: list, users: list, score_type: str, season: Union[str, int], week: Union[str, int]) -> Union[dict, None]:
+		"""returns dict {matchup_id:[(team_name,score), (team_name, score)]}"""
 		roster_id_dict = self.map_rosterid_to_ownerid(rosters)
-
 
 		if len(matchups) == 0:
 			return None
 
 		#Get the users to team name stats
 		users_dict = self.map_users_to_team_name(users)
-
 
 		#map roster_id to points
 		scoreboards_dict = {}
@@ -115,7 +116,8 @@ class League(BaseApi):
 			else:
 				team_name = "Team name not available"
 
-			team_score = self.get_team_score(team["starters"], score_type, week)
+			# @wfordh 3/6/23: could potentially just use team["starters_points"] to get the team_score
+			team_score = self.get_team_score(team["starters"], score_type, season, week)
 			if team_score is None:
 				team_score = 0
 
@@ -126,7 +128,7 @@ class League(BaseApi):
 				scoreboards_dict[matchup_id].append(team_score_tuple)
 		return scoreboards_dict
 
-	def get_close_games(self, scoreboards, close_num):
+	def get_close_games(self, scoreboards: list, close_num: float) -> dict:
 		""" -Notes: Need to find a better way to compare scores rather than abs value of the difference of floats. """
 		close_games_dict = {}
 		for key in scoreboards:
@@ -137,21 +139,23 @@ class League(BaseApi):
 				close_games_dict[key] = scoreboards[key]
 		return close_games_dict
 
-	def get_team_score(self,starters, score_type, week):
+	def get_team_score(self, starters: list, score_type: str, season: Union[str, int], week: Union[str, int]) -> float:
 		total_score = 0
 		stats = Stats()
-		week_stats = stats.get_week_stats("regular", 2019, week)
+		week_stats = stats.get_week_stats("regular", season, week)
 		for starter in starters:
 			if stats.get_player_week_stats(week_stats, starter) is not None:
 				try:
+					# FH 3/6/23: score_type options are pts_half_ppr, pts_std, pts_ppr
+					# if player is QB and score type is pts_half_ppr, then I think a KeyError will be thrown
 					total_score += stats.get_player_week_stats(week_stats, starter)[score_type]
 				except KeyError:
 					total_score += 0
 
 		return total_score
 
-	# takes a user id and returns the number of empty roster spots on that team
-	def empty_roster_spots(self, user_id):
+	def empty_roster_spots(self, user_id: str) -> Union[int, None]:
+		"""takes a user id and returns the number of empty roster spots on that team"""
 		# get league JSON
 		league = self.get_league()
 		# get size of maximum roster
@@ -166,12 +170,13 @@ class League(BaseApi):
 		# returns None if user was not found
 		return None
 
-	# returns name of league
-	def get_league_name(self):
+	
+	def get_league_name(self) -> str:
+		"""# returns name of league"""
 		return self.get_league()["name"]
 
-	def get_negative_scores(self, week):
+	def get_negative_scores(self, week: Union[str, int]) -> None:
 		pass
 
-	def get_rosters_players(self):
+	def get_rosters_players(self) -> None:
 		pass
