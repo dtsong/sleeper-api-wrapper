@@ -1,6 +1,6 @@
 from sleeper_wrapper import League 
 
-def test_get_league(capsys):
+def test_get_league() -> None:
 	""" Tests the get_league method"""
 	league = League(355526480094113792)
 	league_info = league.get_league()
@@ -8,7 +8,7 @@ def test_get_league(capsys):
 	assert isinstance(league_info, dict)
 	assert league_info["league_id"] == "355526480094113792"
 
-def test_get_rosters():
+def test_get_rosters() -> None:
 	""" Tests the get_rosters method"""
 	league = League(355526480094113792)
 	rosters = league.get_rosters()
@@ -16,7 +16,7 @@ def test_get_rosters():
 	assert isinstance(rosters, list) 
 	assert len(rosters)>5
 
-def test_get_users():
+def test_get_users() -> None:
 	""" Tests the get_users method"""
 	league = League(355526480094113792)
 	users = league.get_users()
@@ -25,7 +25,7 @@ def test_get_users():
 	assert isinstance(users[0]["user_id"], str)
 	#I guess username is not a thing
 
-def test_get_matchups(capsys):
+def test_get_matchups() -> None:
 	""" Tests the get_matchups method"""
 	league = League(355526480094113792)
 	matchup_info = league.get_matchups(4)
@@ -37,7 +37,7 @@ def test_get_matchups(capsys):
 
 	assert len(matchup_info) == 0
 
-def test_get_playoff_winners_bracket():
+def test_get_playoff_winners_bracket() -> None:
 	""" Tests the get_playoff_winners_bracket method"""
 	league = League(355526480094113792)
 	bracket = league.get_playoff_winners_bracket()
@@ -46,7 +46,7 @@ def test_get_playoff_winners_bracket():
 	assert isinstance(bracket, list)
 	assert isinstance(first_item, dict)
 
-def test_get_playoff_losers_bracket():
+def test_get_playoff_losers_bracket() -> None:
 	""" Tests the get_playoff_losers method"""
 	league = League(355526480094113792)
 	bracket = league.get_playoff_losers_bracket()
@@ -55,7 +55,7 @@ def test_get_playoff_losers_bracket():
 	assert isinstance(bracket, list)
 	assert isinstance(first_item, dict)
 
-def test_get_transactions():
+def test_get_transactions() -> None:
 	""" Tests the get_transactions method
 	Note: Not really sure wether this method works or what its supposed to do yet because the season has not fully started.
 	"""
@@ -66,7 +66,7 @@ def test_get_transactions():
 	transactions = league.get_transactions("4")
 	assert isinstance(transactions, list)
 
-def test_get_trades():
+def test_get_trades() -> None:
 	""" Tests the get_trades method.
 	Note: It would be better if we had trades to verify!"""
 	league = League(355526480094113792)
@@ -74,7 +74,7 @@ def test_get_trades():
 	assert isinstance(trades, list)
 	assert len(trades) == 0
 
-def test_get_waivers():
+def test_get_waivers() -> None:
 	"""Tests the get_waivers method.
 	Note: It would be better if we had waivers to verify!"""
 	league = League(355526480094113792)
@@ -82,7 +82,7 @@ def test_get_waivers():
 	assert isinstance(waivers, list)
 	assert len(waivers) == 0
 
-def test_get_free_agents():
+def test_get_free_agents() -> None:
 	"""Tests the get_free_agents method.
 	Note: It would be better if we had free agents to verify!"""
 	league = League(355526480094113792)
@@ -90,7 +90,7 @@ def test_get_free_agents():
 	assert isinstance(free_agents, list)
 	assert len(free_agents) == 0
 
-def test_get_traded_picks():
+def test_get_traded_picks() -> None:
 	""" Tests the get_traded_picks method"""
 	league = League(355526480094113792)
 	traded_picks = league.get_traded_picks()
@@ -99,14 +99,15 @@ def test_get_traded_picks():
 	assert isinstance(traded_picks, list)
 	assert isinstance(first_item, dict)
 
-def test_get_all_drafts():
+def test_get_all_drafts() -> None:
 	league = League(355526480094113792)
 	drafts = league.get_all_drafts()
 	first_item = drafts[0]
 
 	assert isinstance(drafts, list)
 	assert isinstance(first_item, dict)
-def test_get_standings(capsys):
+
+def test_get_standings() -> None:
 	""" Tests the get_standings method"""
 	league = League(355526480094113792)
 	rosters = league.get_rosters()
@@ -117,7 +118,7 @@ def test_get_standings(capsys):
 	assert isinstance(first_item, tuple)
 	assert len(standings)==12
 
-def test_get_scoreboards(capsys):
+def test_get_scoreboards() -> None:
 	"""Tests the get_scoreoards method 
 	-Needs more testing after the season starts"""
 	league = League(442724598706860032)
@@ -128,7 +129,7 @@ def test_get_scoreboards(capsys):
 	print(scoreboards)
 	assert isinstance(scoreboards, dict)
 
-def test_get_close_games(capsys):
+def test_get_close_games() -> None:
 	""" 
 	Tests the get_close_games method
 	-Notes: Need to test more. 
@@ -141,7 +142,7 @@ def test_get_close_games(capsys):
 	close_games = league.get_close_games(scoreboards, 10)
 	assert isinstance(close_games, dict)
 
-def test_empty_roster_spots():
+def test_empty_roster_spots() -> None:
 	"""
 	Tests the empty_roster_spots method
 
@@ -162,5 +163,5 @@ def test_empty_roster_spots():
 	# Assertion 2
 	assert league.empty_roster_spots(-10000) is None
 
-def test_get_negative_scores():
+def test_get_negative_scores() -> None:
 	pass
