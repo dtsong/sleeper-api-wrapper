@@ -116,7 +116,6 @@ class League(BaseApi):
 			else:
 				team_name = "Team name not available"
 
-			# @wfordh 3/6/23: could potentially just use team["starters_points"] to get the team_score
 			team_score = self.get_team_score(team["starters"], score_type, season, week)
 			if team_score is None:
 				team_score = 0
