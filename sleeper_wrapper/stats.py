@@ -61,7 +61,7 @@ class Stats(BaseApi):
 		try:
 			player_stats = self.get_player_week_stats(player_id, week)
 			return {
-				stat: value 
+				stat: value
 				for stat, value
 				in player_stats.items()
 				if stat in scoring_formats
