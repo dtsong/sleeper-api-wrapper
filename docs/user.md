@@ -23,3 +23,14 @@ Instantiating a `User` object will allow interaction with Sleeper's [User endpoi
 
 
 ## Examples
+```
+from sleeper_wrapper import User
+
+user = User("foobar")
+
+# get all the user's leagues for the 2023 NFL season
+user_leagues = user.get_all_leagues(sport="nfl", season=2023)
+
+# get all the user's drafts for the 2023 NFL season
+user_drafts = user.get_all_drafts(sport="nfl", season=2023)
+```
