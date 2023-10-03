@@ -2,7 +2,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/dtsong/sleeper-api-wrapper.svg?color=orange)
 ![PyPI](https://img.shields.io/pypi/v/sleeper-api-wrapper)
 # sleeper-api-wrapper
-A Python API wrapper for Sleeper Fantasy Football, as well as tools to simplify data received. It makes all endpoints found in the sleeper api docs: https://docs.sleeper.app/ available and turns the JSON response received into Python types for easy usage.
+A Python API wrapper for Sleeper Fantasy Sports, as well as tools to simplify data received. It makes all endpoints found in the Sleeper API docs: https://docs.sleeper.app/ available and turns the JSON response received into Python types for easy usage.
 
 Ownership was transferred from @SwapnikKatkoori to @dtsong in March 2022 to continue efforts.
 Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
@@ -26,9 +26,9 @@ Want to help? Send me a message to @dtsong
 
 <a name="install"></a>
 # Install
-~~~
+```
 pip install sleeper-api-wrapper
-~~~
+```
 
 <a name="documentation"></a>
 # Documentation
