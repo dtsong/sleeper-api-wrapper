@@ -14,3 +14,12 @@ sleeper-api-wrapper contributors
  
 [scipio314](https://github.com/scipio314)
   - Fixed KeyError in the get_team_score() method.
+
+[Kofi Darfour](https://github.com/kodarfour)
+  - Added ties data to the data returned by the get_standings() method.
+  - Added ability to fetch players from the NBA in the get_all_players() method.
+  - Updated documentation
+    - get_standings()
+    - get_all_players()
+    - get_trending_players()
+      - Made consistent with updated Sleeper API documentation.
