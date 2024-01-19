@@ -1,27 +1,26 @@
 # pyproject.toml
 
-[build-system]
-requires = ["setuptools>=61.0.0", "wheel"] # double check this, just pulling from tutorial
-build-backend = ["setuptools.build_meta"] # same here
-
-[project]
-name = "sleeper-api-wrapper"
+[tool.poetry]
+name = "sleeper-wrapper"
 version = "1.1.0"
 description = "A Python API wrapper for Sleeper Fantasy sports, as well as tools to simplify received data."
+authors = ["Dan Song, Ford Higgins <py-sleeper-api-wrapper-maintainers@googlegroups.com>"]
 readme = "README.md"
-authors = [{ name = "Dan Song", email = "" }] # need email
-license = { file = "LICENSE" }
+license = "MIT"
+homepage = "https://github.com/dtsong/sleeper-api-wrapper"
+repository = "https://github.com/dtsong/sleeper-api-wrapper"
+documentation = "https://github.com/dtsong/sleeper-api-wrapper/tree/master/docs"
+keywords = ["fantasy football", "fantasy sports", "sports", "sleeper fantasy", "sleeper"]
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python ::  3",
 ]
 
-keywords = ["fantasy football", "fantasy sports", "sports", "sleeper fantasy", "sleeper"]
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.22.0"
 
-dependencies = ["requests >= 2.22.0"]
-
-requires-python = ">=3.9"
-
-[project.urls]
-Homepage = "https://github.com/dtsong/sleeper-api-wrapper"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
