@@ -1,7 +1,8 @@
 # pyproject.toml
 
 [tool.poetry]
-name = "sleeper-wrapper"
+name = "sleeper-api-wrapper"
+packages = [ { include = "sleeper_wrapper" } ]
 version = "1.1.0"
 description = "A Python API wrapper for Sleeper Fantasy sports, as well as tools to simplify received data."
 authors = ["Dan Song, Ford Higgins <py-sleeper-api-wrapper-maintainers@googlegroups.com>"]
