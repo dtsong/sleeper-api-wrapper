@@ -125,7 +125,7 @@ def test_get_scoreboards() -> None:
 	matchups = league.get_matchups(1)
 	users = league.get_users()
 	rosters = league.get_rosters()
-	scoreboards = league.get_scoreboards(rosters, matchups, users, "pts_half_ppr", 1)
+	scoreboards = league.get_scoreboards(rosters, matchups, users, "pts_half_ppr", 2019, 1)
 	print(scoreboards)
 	assert isinstance(scoreboards, dict)
 
@@ -138,7 +138,7 @@ def test_get_close_games() -> None:
 	matchups = league.get_matchups(1)
 	users = league.get_users()
 	rosters = league.get_rosters()
-	scoreboards = league.get_scoreboards(rosters, matchups, users, "pts_half_ppr", 1)
+	scoreboards = league.get_scoreboards(rosters, matchups, users, "pts_half_ppr", 2019, 1)
 	close_games = league.get_close_games(scoreboards, 10)
 	assert isinstance(close_games, dict)
 
