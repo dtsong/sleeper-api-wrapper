@@ -157,7 +157,7 @@ def test_empty_roster_spots() -> None:
 	for user in users:
 		user_id = user["user_id"]
 		for roster in rosters:
-			if user_id == roster["user_id"]:
+			if user_id == roster["owner_id"]:
 				assert league.empty_roster_spots(user_id) is not None
 	
 	# Assertion 2
