@@ -28,7 +28,7 @@ def test_get_player_week_score() -> None:
 
 
 	assert isinstance(score, dict)
-	assert score["pts_ppr"] == None
+	assert score["pts_ppr"] == 2.0
 
 	score = stats.get_player_week_score(week_stats, "1262")
 	assert isinstance(score, dict)
@@ -41,7 +41,7 @@ def test_get_player_week_score() -> None:
 
 	
 	score = stats.get_player_week_score(week_stats, "30000000000")
-	assert score is None
+	assert score == {}
 
 def test_get_player_week_stats() -> None:
 	stats = Stats()
