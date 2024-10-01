@@ -308,3 +308,15 @@ class League(BaseApi):
 
 	def get_rosters_players(self) -> None:
 		pass
+
+
+def get_sport_state(sport: str = "nfl") -> dict:
+	"""
+	Returns info about the current state of the specified sport.
+
+	https://docs.sleeper.com/#get-nfl-state
+
+	Parameters:
+	  - sport: str: Options are "nfl", "nba", "lcs". Default "nfl".
+	"""
+	return BaseApi()._call("https://api.sleeper.app/v1/state/{}".format(sport))

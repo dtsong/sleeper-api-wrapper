@@ -1,4 +1,4 @@
-from sleeper_wrapper import League 
+from sleeper_wrapper import get_sport_state, League 
 
 def test_get_league() -> None:
 	""" Tests the get_league method"""
@@ -125,7 +125,7 @@ def test_get_scoreboards() -> None:
 	matchups = league.get_matchups(1)
 	users = league.get_users()
 	rosters = league.get_rosters()
-	scoreboards = league.get_scoreboards(rosters, matchups, users, "pts_half_ppr", 1)
+	scoreboards = league.get_scoreboards(rosters, matchups, users, "pts_half_ppr", 2019, 1)
 	print(scoreboards)
 	assert isinstance(scoreboards, dict)
 
@@ -138,7 +138,7 @@ def test_get_close_games() -> None:
 	matchups = league.get_matchups(1)
 	users = league.get_users()
 	rosters = league.get_rosters()
-	scoreboards = league.get_scoreboards(rosters, matchups, users, "pts_half_ppr", 1)
+	scoreboards = league.get_scoreboards(rosters, matchups, users, "pts_half_ppr", 2019, 1)
 	close_games = league.get_close_games(scoreboards, 10)
 	assert isinstance(close_games, dict)
 
@@ -157,7 +157,7 @@ def test_empty_roster_spots() -> None:
 	for user in users:
 		user_id = user["user_id"]
 		for roster in rosters:
-			if user_id == roster["user_id"]:
+			if user_id == roster["owner_id"]:
 				assert league.empty_roster_spots(user_id) is not None
 	
 	# Assertion 2
@@ -165,3 +165,17 @@ def test_empty_roster_spots() -> None:
 
 def test_get_negative_scores() -> None:
 	pass
+
+def test_get_sport_state(mocker) -> None:
+	mock_data = {
+		"week": 1, 
+		"season_type": "regular"
+		}
+	mock_base_api_call = mocker.patch(
+		"sleeper_wrapper.league.BaseApi._call", return_value=mock_data
+		)
+	response = get_sport_state("nfl")
+	assert response == mock_data
+	mock_base_api_call.assert_called_once_with(
+		"https://api.sleeper.app/v1/state/nfl"
+		)
