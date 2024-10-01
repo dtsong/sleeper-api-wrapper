@@ -1,13 +1,15 @@
 # League
+
+## League
 `sleeper_wrapper.League(league_id)`
 
 Instantiating a `League` object will allow interaction with Sleeper's [Leagues endpoint](https://docs.sleeper.com/#leagues) by pulling data for the league specified by the `league_id`. Examples for how the data is structured for methods hitting the API directly may be found in their documentation for the endpoint.
 
 
-## Attributes
+### Attributes
 `league_id` _(Union[int, str])_: The Sleeper ID for the league. May be provided as a string or int.
 
-## Methods
+### Methods
 `get_league()`: Returns the league's data.
 
 `get_rosters()`: Retrieves the league's rosters.
@@ -62,6 +64,11 @@ no longer officially documented by Sleeper.
 `get_league_name()`: Returns name of league.
 
 
+## Functions
+
+`get_sport_state()`: Returns current state for the given sport.
+
+
 ## Examples
 ```
 from sleeper_wrapper import League
@@ -79,4 +86,7 @@ standings = league.get_standings(rosters=rosters, users=users)
 
 # retrieves the scoreboard for the given week and returns it with user information
 scoreboards = league.get_scoreboards(rosters=rosters, matchups=matchups, users=users, score_type="pts_std", season=2023, week=1)
+
+# gets current NFL state, e.g. current week
+state = get_sport_state(sport="nfl")
 ```
