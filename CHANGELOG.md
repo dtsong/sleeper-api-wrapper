@@ -13,3 +13,6 @@
 
 ## Version 1.0.7
 - Fixed KeyError in the get_team_score() method.
+
+## Version 1.2.0
+- Added `get_sport_state` function to `league` module.
