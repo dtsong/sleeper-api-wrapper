@@ -3,7 +3,7 @@
 [tool.poetry]
 name = "sleeper-api-wrapper"
 packages = [ { include = "sleeper_wrapper" } ]
-version = "1.1.0"
+version = "1.2.0"
 description = "A Python API wrapper for Sleeper Fantasy sports, as well as tools to simplify received data."
 authors = ["Dan Song, Ford Higgins <py-sleeper-api-wrapper-maintainers@googlegroups.com>"]
 readme = "README.md"
@@ -25,3 +25,7 @@ requests = "^2.22.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-mock = "*"
