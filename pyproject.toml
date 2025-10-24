@@ -19,7 +19,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 requests = "^2.22.0"
 
 [build-system]
@@ -29,3 +29,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
 pytest-mock = "*"
+tox = "^4.31.0"
+nox = "^2025.10.16"
