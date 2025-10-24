@@ -30,10 +30,12 @@ jobs:
         uses: abatilo/actions-poetry@v3
         with:
           poetry-version: "main"
-      # - name: Install tox
-      #   run: poetry add --group=dev tox
+      - name: Install tox
+        run: poetry add --group=dev tox
       - name: Select Python version
         run: poetry env use ${{ matrix.env }}
+      - name: Install packages
+        run: poetry install
       - name: Run test suite
         run: tox run
         env:
