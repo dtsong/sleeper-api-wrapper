@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: ${{ matrix.env }}
       - name: Run image
-        uses: abatilo/actions-poetry@v3
+        uses: abatilo/actions-poetry@v4
         with:
           poetry-version: "main"
       - name: Install tox
