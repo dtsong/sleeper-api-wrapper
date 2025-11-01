@@ -1,0 +1,42 @@
+name: tox_check
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  test:
+    name: tox test with ${{ matrix.env }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        env:
+          - "3.13"
+          - "3.12"
+          - "3.11"
+          - "3.10"
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.env }}
+      - name: Run image
+        uses: abatilo/actions-poetry@v3
+        with:
+          poetry-version: "main"
+      - name: Install tox
+        run: poetry add --group=dev tox
+      - name: Select Python version
+        run: poetry env use ${{ matrix.env }}
+      - name: Install packages
+        run: poetry install
+      - name: Run test suite
+        run: poetry run tox run
+        env:
+          TOX_GH_MAJOR_MINOR: ${{ matrix.env }}
