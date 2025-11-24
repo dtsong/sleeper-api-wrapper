@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+	<header class="panel__header">
+		<div>
+			<h1>Draft Results</h1>
+			{% if draft %}
+				<p>Draft ID {{ draft.draft_id }} · Type {{ draft.type }} · Rounds {{ draft.settings.rounds }}</p>
+			{% else %}
+				<p>No drafts found for this league.</p>
+			{% endif %}
+		</div>
+	</header>
+	{% if picks %}
+	<table>
+		<thead>
+			<tr>
+				<th>Round</th>
+				<th>Pick</th>
+				<th>Player</th>
+				<th>Picked By</th>
+				<th>Roster</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for pick in picks %}
+			<tr>
+				<td>{{ pick.round }}</td>
+				<td>{{ pick.pick_no }}</td>
+				<td>{{ pick.player }}</td>
+				<td>{{ pick.picked_by or "Unknown" }}</td>
+				<td>{{ pick.roster_id }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+		<p>No picks to display.</p>
+	{% endif %}
+</section>
+{% endblock %}

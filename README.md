@@ -14,6 +14,7 @@ Original Repository: https://github.com/SwapnikKatkoori/sleeper-api-wrapper
 4. [Notes](#notes)
 5. [Dependencies](#depends)
 6. [License](#license)
+7. [FastAPI Web Demo](#fastapi)
 
 <a name="roadmap"></a>
 # Project Roadmap
@@ -50,3 +51,28 @@ This package is intended to be used by Python version 3.8 and higher. There migh
 <a name="license"></a>
 # License
 This project is licensed under the terms of the MIT license.
+
+<a name="fastapi"></a>
+# FastAPI Web Demo
+
+A simple FastAPI app lives under `webapp/` to showcase the wrapper in a browser for league `1257507151190958081`. It is intentionally lean but organized for extension.
+
+### Run locally
+```
+pip install -e .
+pip install "fastapi>=0.115" "uvicorn[standard]>=0.30" "jinja2>=3.1" "python-multipart>=0.0.9"
+uvicorn webapp.main:app --reload
+```
+
+Override the league or sport via environment variables:
+```
+export LEAGUE_ID=YOUR_LEAGUE_ID
+export SPORT=nfl
+export SCORE_TYPE=pts_ppr
+```
+
+Pages:
+- `/` League dashboard (standings, managers, matchups, recent transactions).
+- `/rosters` Per-manager rosters with starters/bench.
+- `/draft` Draft results for the league's primary draft.
+- `/players` Player stats for the season; search or use trending adds/drops.
