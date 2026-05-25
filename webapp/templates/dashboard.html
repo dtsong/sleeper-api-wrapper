@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+	<h1>{{ info.name or "League Dashboard" }}</h1>
+	<p>Season {{ info.season }} · Week {{ week }} · Sport {{ info.sport }}</p>
+	<div class="pill-row">
+		<div class="pill">Status: {{ info.status or "active" }}</div>
+		<div class="pill">Scoring: {{ settings.scoring_settings or settings.get("scoring_settings", "standard") }}</div>
+		<div class="pill">Roster count: {{ info.total_rosters }}</div>
+	</div>
+</section>
+
+<section class="panel">
+	<header class="panel__header">
+		<div>
+			<h2>Standings</h2>
+			<p>Wins/Losses reflect Sleeper scoring (including custom settings).</p>
+		</div>
+	</header>
+	<table>
+		<thead>
+			<tr>
+				<th>Team</th>
+				<th>W</th>
+				<th>L</th>
+				<th>Points</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for team, wins, losses, points in standings %}
+			<tr>
+				<td>{{ team }}</td>
+				<td>{{ wins }}</td>
+				<td>{{ losses }}</td>
+				<td>{{ points }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</section>
+
+<section class="panel">
+	<header class="panel__header">
+		<div>
+			<h2>League Settings</h2>
+			<p>Pulled directly from Sleeper so custom scoring/positions are honored.</p>
+		</div>
+	</header>
+	<div class="grid two">
+		<div>
+			<h4>Structure</h4>
+			<ul class="list">
+				<li>Teams: {{ settings.teams or info.total_rosters }}</li>
+				<li>Playoff Teams: {{ settings.playoff_teams or "?" }}</li>
+				<li>Playoff Rounds: {{ settings.playoff_rounds or "?" }}</li>
+				<li>Draft Rounds: {{ settings.draft_rounds or "?" }}</li>
+				<li>Roster Positions: {{ info.roster_positions }}</li>
+			</ul>
+		</div>
+		<div>
+			<h4>Scoring</h4>
+			<ul class="list">
+				<li>PPR: {{ settings.scoring_settings.pts_per_reception if settings.scoring_settings else "0" }}</li>
+				<li>Half PPR: {{ settings.scoring_settings.rec_0_5 if settings.scoring_settings else "0" }}</li>
+				<li>Six-pt Pass TD: {{ settings.scoring_settings.pass_td if settings.scoring_settings else "?" }}</li>
+				<li>Custom scoring keys: {{ settings.scoring_settings.keys() if settings.scoring_settings else "standard" }}</li>
+			</ul>
+		</div>
+	</div>
+</section>
+
+<section class="panel">
+	<header class="panel__header">
+		<div>
+			<h2>Matchup Scoreboard</h2>
+			<p>Week {{ week }}</p>
+		</div>
+		<form method="get" class="inline-form">
+			<label for="week">Week</label>
+			<input id="week" name="week" type="number" value="{{ week }}" min="1">
+			<button type="submit">Go</button>
+		</form>
+	</header>
+	<div class="grid two">
+	{% if scoreboard %}
+		{% for matchup in scoreboard %}
+			<div class="card">
+				<div class="card__title">Matchup {{ matchup.matchup_id }}</div>
+				<div class="score-row">
+					{% for team in matchup.teams %}
+						<div class="score">
+							<div class="score__name">{{ team.team_name }}</div>
+							<div class="score__points">{{ '%.2f' % (team.points or 0) }}</div>
+							{% if team.projected is not none %}
+								<div class="score__projected">Proj {{ '%.1f' % team.projected }}</div>
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<p>No matchups available for this week.</p>
+	{% endif %}
+	</div>
+</section>
+
+<section class="panel">
+	<header class="panel__header">
+		<div>
+			<h2>Managers</h2>
+			<p>Team names pulled from league metadata.</p>
+		</div>
+	</header>
+	<div class="grid three">
+	{% for manager in managers %}
+		<div class="card">
+			<div class="card__title">{{ manager.metadata.team_name or manager.display_name or manager.username }}</div>
+			<div class="card__body">
+				<div class="muted">User: {{ manager.username }}</div>
+				<div class="muted">ID: {{ manager.user_id }}</div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+</section>
+
+<section class="panel">
+	<header class="panel__header">
+		<div>
+			<h2>Recent Transactions (Week {{ week }})</h2>
+			<p>Waivers, trades, free agency activity.</p>
+		</div>
+	</header>
+	{% if transactions %}
+		<ul class="list">
+		{% for tx in transactions %}
+			<li>
+				<strong>{{ tx.type|capitalize }}</strong>
+				<span class="muted">Status: {{ tx.status }}</span>
+				{% if tx.roster_ids %}<span class="muted">Rosters: {{ tx.roster_ids }}</span>{% endif %}
+				{% if tx.drops %}<span class="muted">Drops: {{ tx.drops }}</span>{% endif %}
+				{% if tx.adds %}<span class="muted">Adds: {{ tx.adds }}</span>{% endif %}
+			</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p>No transactions recorded for this week.</p>
+	{% endif %}
+</section>
+{% endblock %}

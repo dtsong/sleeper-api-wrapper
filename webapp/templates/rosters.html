@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+	<header class="panel__header">
+		<div>
+			<h1>Rosters</h1>
+			<p>Switch between managers to view starters and bench.</p>
+		</div>
+	</header>
+	<div class="grid two">
+	{% for roster in rosters %}
+		<div class="card">
+			<div class="card__title">{{ roster.owner_name }} <span class="muted">Roster {{ roster.roster_id }}</span></div>
+			<div class="card__body">
+				<h4>Starters</h4>
+				<ul class="list">
+				{% for player in roster.starters %}
+					<li>{{ player.name }} <span class="muted">({{ player.position or "??" }} - {{ player.team or "FA" }})</span></li>
+				{% endfor %}
+				</ul>
+				<h4>Bench</h4>
+				<ul class="list">
+				{% for player in roster.bench %}
+					<li>{{ player.name }} <span class="muted">({{ player.position or "??" }} - {{ player.team or "FA" }})</span></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+</section>
+{% endblock %}

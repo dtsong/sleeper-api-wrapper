@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+	<header class="panel__header">
+		<div>
+			<h1>Player Stats</h1>
+			<p>Season {{ season }} · {{ "Search results" if query else "Trending "+add_drop }}</p>
+		</div>
+		<form method="get" class="inline-form">
+			<input type="text" name="q" placeholder="Search player name" value="{{ query or '' }}">
+			<input type="text" name="season" placeholder="Season (e.g. 2024)" value="{{ season or '' }}">
+			<select name="add_drop">
+				<option value="add" {% if add_drop == "add" %}selected{% endif %}>Trending Adds</option>
+				<option value="drop" {% if add_drop == "drop" %}selected{% endif %}>Trending Drops</option>
+			</select>
+			<button type="submit">Update</button>
+		</form>
+	</header>
+	{% if results %}
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Pos</th>
+				<th>Team</th>
+				<th>PPR</th>
+				<th>Std</th>
+				<th>Half PPR</th>
+				<th>Games</th>
+				<th>Trending</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for player in results %}
+			<tr>
+				<td>{{ player.name }}</td>
+				<td>{{ player.position or "?" }}</td>
+				<td>{{ player.team or "FA" }}</td>
+				<td>{{ player.pts_ppr or "—" }}</td>
+				<td>{{ player.pts_std or "—" }}</td>
+				<td>{{ player.pts_half_ppr or "—" }}</td>
+				<td>{{ player.games or "—" }}</td>
+				<td>
+					{% if player.count %}
+						{{ player.count }} {{ player.direction }}
+					{% else %}
+						{% if source == "search" %}search{% else %}—{% endif %}
+					{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p>No players to show for this selection.</p>
+	{% endif %}
+</section>
+{% endblock %}
