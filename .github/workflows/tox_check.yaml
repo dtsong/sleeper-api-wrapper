@@ -33,7 +33,7 @@ jobs:
       - name: Install tox
         run: poetry add --group=dev tox
       - name: Select Python version
-        run: poetry env use python
+        run: poetry env use ${{ matrix.env }}
       - name: Install packages
         run: poetry install
       - name: Run test suite
