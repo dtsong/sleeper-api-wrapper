@@ -18,7 +18,7 @@ class Stats(BaseApi):
 
 	def __init__(self):
 		"""Initializes the instance for getting the stats."""
-		logger.warn(warning_message)
+		logger.warning(warning_message)
 		self._base_url = "https://api.sleeper.app/v1/stats/{}".format("nfl")
 		self._projections_base_url = "https://api.sleeper.app/v1/projections/{}".format("nfl")
 
