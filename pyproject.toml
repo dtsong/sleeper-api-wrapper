@@ -3,7 +3,7 @@
 [tool.poetry]
 name = "sleeper-api-wrapper"
 packages = [ { include = "sleeper_wrapper" } ]
-version = "1.2.2"
+version = "1.2.3"
 description = "A Python API wrapper for Sleeper Fantasy sports, as well as tools to simplify received data."
 authors = ["Dan Song, Ford Higgins <py-sleeper-api-wrapper-maintainers@googlegroups.com>"]
 readme = "README.md"
@@ -19,8 +19,12 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11.0, <3.15"
-requests = ">=2.23.0, <2.34"
+python = ">=3.11, <3.16"
+# 2.32.4 fixes CVE-2024-47081. No upper cap below the next major: caps force a release per minor.
+requests = ">=2.32.4, <3"
+# Direct floor because requests only needs certifi>=2017.4.17.
+# 2026.10.19 removes the roots behind the eMudhra intermediate compromise: https://emudhra.we-have-a-problem.com/
+certifi = ">=2026.10.19"
 
 [build-system]
 requires = ["poetry-core"]
@@ -30,3 +34,8 @@ build-backend = "poetry.core.masonry.api"
 pytest = "*"
 pytest-mock = "*"
 tox = ">=4.31.0"
+
+[tool.pytest.ini_options]
+markers = [
+    "network: test makes real HTTPS calls (Sleeper API or TLS trust canary hosts)",
+]
