@@ -1,4 +1,9 @@
-from sleeper_wrapper import get_sport_state, League 
+import pytest
+
+from sleeper_wrapper import League
+
+# Live Sleeper API tests. Offline tests live in test_base_api.py and test_sport_state.py.
+pytestmark = pytest.mark.network
 
 def test_get_league() -> None:
 	""" Tests the get_league method"""
@@ -165,17 +170,3 @@ def test_empty_roster_spots() -> None:
 
 def test_get_negative_scores() -> None:
 	pass
-
-def test_get_sport_state(mocker) -> None:
-	mock_data = {
-		"week": 1, 
-		"season_type": "regular"
-		}
-	mock_base_api_call = mocker.patch(
-		"sleeper_wrapper.league.BaseApi._call", return_value=mock_data
-		)
-	response = get_sport_state("nfl")
-	assert response == mock_data
-	mock_base_api_call.assert_called_once_with(
-		"https://api.sleeper.app/v1/state/nfl"
-		)

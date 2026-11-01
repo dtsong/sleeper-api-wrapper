@@ -1,6 +1,9 @@
 from sleeper_wrapper import Stats
 import pytest
 
+# Live Sleeper API tests.
+pytestmark = pytest.mark.network
+
 def test_get_all_stats() -> None:
 	stats = Stats()
 	all_stats = stats.get_all_stats('regular', 2018)

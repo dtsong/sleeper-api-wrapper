@@ -1,4 +1,9 @@
+import pytest
+
 from sleeper_wrapper import User
+
+# Live Sleeper API tests.
+pytestmark = pytest.mark.network
 
 def test_get_user() -> None:
 	user = User("swa")
