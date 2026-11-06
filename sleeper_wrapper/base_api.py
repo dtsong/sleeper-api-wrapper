@@ -4,7 +4,7 @@ import json
 
 class BaseApi():
 	def _call(self, url: str) -> dict:
-		result_json_string = requests.get(url);
+		result_json_string = requests.get(url, timeout=30)
 		try:
 			result_json_string.raise_for_status()
 		except requests.exceptions.HTTPError as e:
