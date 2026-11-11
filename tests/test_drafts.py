@@ -1,4 +1,9 @@
+import pytest
+
 from sleeper_wrapper import Drafts
+
+# Live Sleeper API tests.
+pytestmark = pytest.mark.network
 
 def test_get_specific_draft() -> None:
 	draft = Drafts(257270643320426496)

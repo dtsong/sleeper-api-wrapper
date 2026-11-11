@@ -30,13 +30,15 @@ Want to help? Send me a message to @dtsong
 pip install sleeper-api-wrapper
 ```
 
+**Security note (eMudhra CA distrust, October 2026):** use pip 26.2.2 or later, and certifi 2026.10.19 or later. Older versions still trust compromised eMudhra intermediate certificates, so downloads and API calls can be intercepted. Version 1.2.3 of this package requires the patched certifi. Details: https://emudhra.we-have-a-problem.com/
+
 <a name="documentation"></a>
 # Documentation
 There are five objects in the package that get data from the Sleeper API. Most of them are intuitive based on the [Sleeper API docs](https://docs.sleeper.com/), but full documentation for the Python objects and their methods can be found in the [`docs` folder](https://github.com/dtsong/sleeper-api-wrapper/tree/master/docs). There are some bespoke methods for transforming the data into more useful structures in addition to the methods that directly call the API.
 
 <a name="notes"></a>
 # Notes
-This package is intended to be used by Python version 3.8 and higher. There might be some wacky results for previous versions.
+This package is intended to be used by Python version 3.11 and higher. There might be some wacky results for previous versions.
 
 <a name="depends"></a>
 # Dependencies

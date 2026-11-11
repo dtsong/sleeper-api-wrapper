@@ -1,4 +1,9 @@
+import pytest
+
 from sleeper_wrapper import Players
+
+# Live Sleeper API tests.
+pytestmark = pytest.mark.network
 
 def test_get_trending_players() -> None:
 	players = Players()
